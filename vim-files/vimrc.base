@@ -8,6 +8,14 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
+Bundle 'majutsushi/tagbar'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'fholgado/minibufexpl'
+Bundle 'kien/ctrlp.vim'
+
+
+
 "TAB settings.
 set tabstop=4
 set shiftwidth=4
@@ -93,9 +101,6 @@ nnoremap <right> <nop>
 "inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
-
-" Rope settings."
-inoremap <leader>j <ESC>:RopeGotoDefinition<cr>
 
 " Get Rid of stupid Goddamned help keys
 inoremap <F1> <ESC>
@@ -208,19 +213,10 @@ let g:miniBufExplModSelTarget = 1
 hi MBEChanged ctermfg=white
 hi MBENormal ctermfg=white
 
-" Rope Plugin settings
-" imap <leader>j <ESC>:RopeGotoDefinition<cr>
-nmap <leader>j <ESC>:RopeGotoDefinition<cr>
-
 " Tagbar key bindings."
 nmap <leader>l <ESC>:TagbarToggle<cr>
 imap <leader>l <ESC>:TagbarToggle<cr>i
 let g:tagbar_autofocus = 1
-
-" Snipmate remap settings. It's binding overwritten standard
-" bindings.
-" Snipmate using bellow VIM's default keys, just unmap it.
-" autocmd VimEnter * unmap! <C-i>
 
 " ctrlp settings
 " ignore virtual environments
@@ -233,7 +229,5 @@ let g:ctrlp_open_new_file = 'r'
 " on second thought dont, slowed everything done toomuch
 " let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:40,results:40'
 
-" Syntastic settings
-let g:syntastic_python_checker_args = '--ignore=E225'
 " =========== END Plugin Settings =========="
 "
