@@ -4,17 +4,58 @@
 set nocompatible
 set modelines=0
 
+
+" ============ Bundle settings
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
+" ========== Tagbar Settings ================"
 Bundle 'majutsushi/tagbar'
+" Tagbar key bindings."
+nmap <leader>l <ESC>:TagbarToggle<cr>
+imap <leader>l <ESC>:TagbarToggle<cr>i
+let g:tagbar_autofocus = 1
+
+" ========== NerdTree Settings ================"
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
+" Mapping to NERDTree
+nnoremap <C-n> :NERDTreeToggle<cr>
+let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$']
+
+" ========== MiniBufExplorer Settings ================"
 Bundle 'fholgado/minibufexpl.vim'
+" Mini Buffer some settigns."
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+" Tab color settings to make it more visible.
+hi MBEChanged ctermfg=white
+hi MBENormal ctermfg=white
+
+" ========== ctrlp Settings ================"
 Bundle 'kien/ctrlp.vim'
+" ctrlp settings
+" ignore virtual environments
+let g:ctrlp_custom_ignore = 'venv'
+" dont set a limit to the files it will open
+let g:ctrlp_max_files = 0
+" tell ctrlp to create new files in the same window
+let g:ctrlp_open_new_file = 'r'
+" increase the results from 10 to 40
+" on second thought dont, slowed everything done toomuch
+" let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:40,results:40'
 
+Bundle 'msanders/snipmate.vim'
 
+"nginx highlighting
+Bundle 'vim-scripts/nginx.vim'
+
+Bundle 'junegunn/goyo.vim'
+
+Bundle 'vim-scripts/CCTree'
 
 "TAB settings.
 set tabstop=4
@@ -195,39 +236,3 @@ endif
 "autocmd bufwritepost .vimrc source ~/.vimrc
 
 " ========== END Gvim Settings ==========
-
-
-" ========== Plugin Settings =========="
-
-" Mapping to NERDTree
-nnoremap <C-n> :NERDTreeToggle<cr>
-let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$']
-
-" Mini Buffer some settigns."
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
-
-" Tab color settings to make it more visible.
-hi MBEChanged ctermfg=white
-hi MBENormal ctermfg=white
-
-" Tagbar key bindings."
-nmap <leader>l <ESC>:TagbarToggle<cr>
-imap <leader>l <ESC>:TagbarToggle<cr>i
-let g:tagbar_autofocus = 1
-
-" ctrlp settings
-" ignore virtual environments
-let g:ctrlp_custom_ignore = 'venv'
-" dont set a limit to the files it will open
-let g:ctrlp_max_files = 0
-" tell ctrlp to create new files in the same window
-let g:ctrlp_open_new_file = 'r'
-" increase the results from 10 to 40
-" on second thought dont, slowed everything done toomuch
-" let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:40,results:40'
-
-" =========== END Plugin Settings =========="
-"
