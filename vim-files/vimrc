@@ -8,15 +8,19 @@ set modelines=0
 "Changing Leader Key Needs to be done first
 let mapleader = ","
 
-" ============ Bundle settings =============="
-if has('win32')
-    set rtp+=~/dotfiles/vim-files/vim/bundle/vundle
-    let path='~/dotfiles/vim-files/vim/bundle'
-    call vundle#rc(path)
-else
-    set rtp+=~/.vim/bundle/vundle
-    call vundle#rc()
+" OS detection
+let g:os_windows = (has('win16') || has('win32') || has('win64')) && &shellcmdflag =~ '/'
+let g:os_cygwin = has('win32unix')
+
+let s:vimDir='~/.vim'
+if g:os_windows
+    let s:vimDir='~/vimfiles'
 endif
+
+" ============ Bundle settings =============="
+let s:bundleDir=s:vimDir . '/bundle'
+let &runtimepath .= ',' . fnameescape(expand(s:bundleDir . '/vundle'))
+call vundle#rc(fnameescape(expand(s:bundleDir)))
 Bundle 'gmarik/vundle'
 
 " ========== Color Schemes= ================="
