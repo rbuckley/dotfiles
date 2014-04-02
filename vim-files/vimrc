@@ -9,8 +9,14 @@ set modelines=0
 let mapleader = ","
 
 " ============ Bundle settings =============="
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+if has('win32')
+    set rtp+=~/dotfiles/vim-files/vim/bundle/vundle
+    let path='~/dotfiles/vim-files/vim/bundle'
+    call vundle#rc(path)
+else
+    set rtp+=~/.vim/bundle/vundle
+    call vundle#rc()
+endif
 Bundle 'gmarik/vundle'
 
 " ========== Color Schemes= ================="
@@ -37,10 +43,15 @@ let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$']
 " ======= MiniBufExplorer Settings =========="
 Bundle 'fholgado/minibufexpl.vim'
 " Mini Buffer some settigns."
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
+" window navigation
+noremap <C-Up>       <C-W>k
+noremap <C-Down>     <C-W>j
+noremap <C-Left>     <C-W>h
+noremap <C-Right>    <C-W>l
+" buffer navigation
+"let g:miniBufExplCycleArround = 0
+noremap <C-S-l>     :MBEbf<CR>
+noremap <C-S-h>     :MBEbb<CR>
 
 " ========== ctrlp Settings ================"
 Bundle 'kien/ctrlp.vim'
@@ -67,6 +78,9 @@ Bundle 'vim-scripts/nginx.vim'
 
 " =========== Focus on stuff =============="
 Bundle 'junegunn/goyo.vim'
+let g:goyo_width = 120
+let g:goyo_margin_top = 20
+let g:goyo_margin_bottom = 20
 nnoremap <leader>f :Goyo<CR>
 
 " ============ C code browsing ============"
@@ -75,7 +89,11 @@ Bundle 'vim-scripts/CCTree'
 " =========== Grep Integration ============="
 Bundle 'yegappan/grep'
 
-
+" =========== Yankstack for copy pasting `===='
+"Bundle 'maxbrunsfeld/vim-yankstack'
+"let g:yankstack_map_keys = 0
+"nmap <leader>p <Plug>yankstack_substitute_older_paste
+"nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
 "TAB settings.
 set tabstop=4
@@ -100,7 +118,7 @@ set ruler
 set backspace=indent,eol,start
 set laststatus=2
 
-"set relativenumber
+"set relativenumbee
 set number
 set norelativenumber
 
