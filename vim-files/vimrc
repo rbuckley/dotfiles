@@ -102,6 +102,7 @@ Bundle 'yegappan/grep'
 " =========== Outlook Integration ===="
 if g:os_windows 
     Bundle 'vim-scripts/OutlookVim'
+    let g:outlook_supported_body_format = 'html'
 endif
 
 " =========== Outlook Integration ===="
@@ -111,6 +112,13 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+
+" More Windows only settings
+if g:os_windows
+"   to allow swap files to be written in the temp directory
+    set directory=.,$TEMP
+
+endif
 
 " More Common Settings.
 set encoding=utf-8
@@ -199,7 +207,7 @@ vnoremap <F1> <ESC>
 "nnoremap ; :
 
 " Set vim to save the file on focus out.
-au FocusLost * :wa
+"au FocusLost * :wa
 
 " Adding More Shorcuts keys using leader kye.
 " Leader Kye provide separate namespace for specific commands.
