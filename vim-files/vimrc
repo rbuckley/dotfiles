@@ -102,9 +102,10 @@ Bundle 'yegappan/grep'
 " =========== Outlook Integration ===="
 if g:os_windows 
     Bundle 'vim-scripts/OutlookVim'
-
 endif
 
+" =========== Outlook Integration ===="
+Bundle 'tpope/vim-fugitive'
 "TAB settings.
 set tabstop=4
 set shiftwidth=4
