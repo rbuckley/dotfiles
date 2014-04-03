@@ -5,10 +5,30 @@ set nocompatible
 set modelines=0
 
 
-" ============ Bundle settings
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+"Changing Leader Key Needs to be done first
+let mapleader = ","
+
+" OS detection
+let g:os_windows = (has('win16') || has('win32') || has('win64')) && &shellcmdflag =~ '/'
+let g:os_cygwin = has('win32unix')
+
+let s:vimDir='~/.vim'
+if g:os_windows
+    let s:vimDir='~/vimfiles'
+endif
+
+" ============ Bundle settings =============="
+let s:bundleDir=s:vimDir . '/bundle'
+let &runtimepath .= ',' . fnameescape(expand(s:bundleDir . '/vundle'))
+call vundle#rc(fnameescape(expand(s:bundleDir)))
 Bundle 'gmarik/vundle'
+
+" ========== Color Schemes= ================="
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'jonathanfilip/vim-lucius'
+
+" =========== Powerline (statusbar) ============="
+Bundle 'bling/vim-airline'
 
 " ========== Tagbar Settings ================"
 Bundle 'majutsushi/tagbar'
@@ -17,23 +37,25 @@ nmap <leader>l <ESC>:TagbarToggle<cr>
 imap <leader>l <ESC>:TagbarToggle<cr>i
 let g:tagbar_autofocus = 1
 
-" ========== NerdTree Settings ================"
+" ========== NerdTree Settings ==============="
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 " Mapping to NERDTree
 nnoremap <C-n> :NERDTreeToggle<cr>
 let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$']
 
-" ========== MiniBufExplorer Settings ================"
+" ======= MiniBufExplorer Settings =========="
 Bundle 'fholgado/minibufexpl.vim'
 " Mini Buffer some settigns."
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
-" Tab color settings to make it more visible.
-hi MBEChanged ctermfg=white
-hi MBENormal ctermfg=white
+" window navigation
+noremap <C-Up>       <C-W>k
+noremap <C-Down>     <C-W>j
+noremap <C-Left>     <C-W>h
+noremap <C-Right>    <C-W>l
+" buffer navigation
+"let g:miniBufExplCycleArround = 0
+noremap <C-S-l>     :MBEbf<CR>
+noremap <C-S-h>     :MBEbb<CR>
 
 " ========== ctrlp Settings ================"
 Bundle 'kien/ctrlp.vim'
@@ -47,15 +69,35 @@ let g:ctrlp_open_new_file = 'r'
 " increase the results from 10 to 40
 " on second thought dont, slowed everything done toomuch
 " let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:40,results:40'
+" allow cross session caching
+let g:ctrlp_use_caching = 1 
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 
+" ============== Snipmate ==================="
 Bundle 'msanders/snipmate.vim'
 
-"nginx highlighting
+" ============= nginx highlighting ==========="
 Bundle 'vim-scripts/nginx.vim'
 
+" =========== Focus on stuff =============="
 Bundle 'junegunn/goyo.vim'
+let g:goyo_width = 120
+let g:goyo_margin_top = 20
+let g:goyo_margin_bottom = 20
+nnoremap <leader>f :Goyo<CR>
 
+" ============ C code browsing ============"
 Bundle 'vim-scripts/CCTree'
+
+" =========== Grep Integration ============="
+Bundle 'yegappan/grep'
+
+" =========== Yankstack for copy pasting `===='
+"Bundle 'maxbrunsfeld/vim-yankstack'
+"let g:yankstack_map_keys = 0
+"nmap <leader>p <Plug>yankstack_substitute_older_paste
+"nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
 "TAB settings.
 set tabstop=4
@@ -67,30 +109,28 @@ set expandtab
 set encoding=utf-8
 set scrolloff=3
 set autoindent
-set showmode
+set noshowmode
 set showcmd
 set hidden
 set wildmenu
 set wildmode=list:longest
 set visualbell
 
-"set cursorline
+set cursorline
 set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
 
-"set relativenumber
+"set relativenumbee
 set number
 set norelativenumber
 
 "set undofile
-set shell=/bin/bash
+"set shell=/bin/bash
 set lazyredraw
 set matchtime=3
 
-"Changing Leader Key
-let mapleader = ","
 """"
 " Set title to window
 set title 
@@ -206,33 +246,34 @@ augroup END
 
 nnoremap g; g;zz
 
+" Special Settings for Consoles
+syntax enable
+set background=dark
+colorscheme lucius
+LuciusBlackLowContrast
+
+" diff settings for easy toggle
+nnoremap <silent> <leader>df :call DiffToggle()<CR>
+
+function! DiffToggle()
+    if &diff
+        diffoff
+    else
+        diffthis
+    endif
+:endfunction
+
 " =========== END Basic Vim Settings ===========
 
 
 " =========== Gvim Settings =============
-
-" Removing scrollbars
-if has("gui_running")
-    set guitablabel=%-0.12t%M
-    set guioptions-=T
-    set guioptions-=r
-    set guioptions-=L
-    set guioptions+=a
-    set guioptions-=m
-    colo badwolf
-    set listchars=tab:▸\ ,eol:¬         " Invisibles using the Textmate style
-else
-    set t_Co=256
-    colorschem badwolf
-endif
-
-" Special Settings for Consoles
-"if !has("gui_running")
-"    set t_Co=256
-"    colorschem badwolf
-"endif
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
+set guioptions-=T
 
 " Source the vimrc file after saving it
-"autocmd bufwritepost .vimrc source ~/.vimrc
+autocmd bufwritepost .vimrc source ~/.vimrc
 
 " ========== END Gvim Settings ==========
