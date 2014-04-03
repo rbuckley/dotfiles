@@ -133,7 +133,7 @@ set number
 set norelativenumber
 
 "set undofile
-set shell=/bin/bash
+"set shell=/bin/bash
 set lazyredraw
 set matchtime=3
 
