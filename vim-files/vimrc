@@ -277,12 +277,19 @@ function! DiffToggle()
 
 
 " =========== Gvim Settings =============
+if has("gui_running")
+    set lines=999 columns=999
+endif
 set guioptions-=l
 set guioptions-=L
 set guioptions-=r
 set guioptions-=R
 set guioptions-=T
-
+if g:os_windows
+    set guioptions-=e
+    set guioptions-=m
+    set guioptions-=g
+endif
 " Source the vimrc file after saving it
 autocmd bufwritepost .vimrc source ~/.vimrc
 
