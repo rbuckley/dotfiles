@@ -11,5 +11,6 @@ log2file() {
 }
 
 identify_os() {
-    echo "Your good"
+    echo "You are trying to install on $OSTYPE" >&3
+
 }
