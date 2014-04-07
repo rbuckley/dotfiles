@@ -1,6 +1,7 @@
 
 backup_vimfiles() {
-    
+   cp -r "$HOME/.vim" "$HOME/.vim.bak"
+   cp "$HOME/.vimrc"
 }
 
 link() {

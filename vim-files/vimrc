@@ -29,7 +29,9 @@ Bundle 'jonathanfilip/vim-lucius'
 
 " =========== Powerline (statusbar) ============="
 Bundle 'bling/vim-airline'
-
+let g:airline_theme='wombat'
+let g:airline_powerline_fonts=1
+set ttimeoutlen=50
 " ========== Tagbar Settings ================"
 Bundle 'majutsushi/tagbar'
 " Tagbar key bindings."
@@ -269,6 +271,21 @@ syntax enable
 set background=dark
 colorscheme lucius
 LuciusBlackLowContrast
+
+
+"MBE Colors
+autocmd ColorScheme * highlight link MBENormal               Folded 
+autocmd ColorScheme * highlight link MBEChanged              ErrorMsg
+autocmd ColorScheme * highlight link MBEVisibleNormal        Title
+autocmd ColorScheme * highlight link MBEVisibleChanged       Error
+autocmd ColorScheme * highlight link MBEVisibleActiveNormal  SpellRare
+autocmd ColorScheme * highlight link MBEVisibleActiveChanged Todo
+"hi link MBENormal               Folded
+"hi link MBEChanged              ErrorMsg
+"hi link MBEVisibleNormal        Title
+"hi link MBEVisibleChanged       Error
+"hi link MBEVisibleActiveNormal  SpellRare
+"hi link MBEVisibleActiveChanged Todo 
 
 " diff settings for easy toggle
 nnoremap <silent> <leader>df :call DiffToggle()<CR>
