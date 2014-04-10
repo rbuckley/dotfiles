@@ -39,12 +39,18 @@ nmap <leader>l <ESC>:TagbarToggle<cr>
 imap <leader>l <ESC>:TagbarToggle<cr>i
 let g:tagbar_autofocus = 1
 
+let g:tagbar_type_make = {
+    \ 'kinds' : [
+        \ 'm:macros',
+        \ 't:targets',
+    \ ],
+\ }
 " ========== NerdTree Settings ==============="
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 " Mapping to NERDTree
 nnoremap <C-n> :NERDTreeToggle<cr>
-let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$']
+let NERDTreeIgnore=['\~$', '\.pyc$']
 
 " ======= MiniBufExplorer Settings =========="
 Bundle 'fholgado/minibufexpl.vim'
@@ -94,6 +100,7 @@ Bundle 'vim-scripts/CCTree'
 
 " =========== Grep Integration ============="
 Bundle 'yegappan/grep'
+nnoremap <silent> <leader>mm :Rgrep<CR>
 
 " =========== Yankstack for copy pasting ====="
 "Bundle 'maxbrunsfeld/vim-yankstack'
@@ -107,8 +114,18 @@ if g:os_windows
     let g:outlook_supported_body_format = 'html'
 endif
 
-" =========== Outlook Integration ===="
+" =========== Git Integration ===="
 Bundle 'tpope/vim-fugitive'
+
+" =========== DirDiff Integration ===="
+Bundle 'vim-scripts/DirDiff.vim'
+
+" =========== VCS control ============="
+Bundle 'vcscommand.vim'
+
+" =========== Pace plugin ============"
+Bundle 'rbuckley/pace.vim'
+
 "TAB settings.
 set tabstop=4
 set shiftwidth=4
@@ -208,9 +225,6 @@ vnoremap <F1> <ESC>
 " Map : to ; also in command mode.
 "nnoremap ; :
 
-" Set vim to save the file on focus out.
-"au FocusLost * :wa
-
 " Adding More Shorcuts keys using leader kye.
 " Leader Kye provide separate namespace for specific commands.
 ",W Command to remove white space from a file.
@@ -236,7 +250,10 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Working with split screen nicely
 " Resize Split When the window is resized"
-au VimResized * :wincmd =
+augroup resize
+    au!
+    au VimResized * :wincmd =
+augroup END
 
 
 " Wildmenu completion "
@@ -274,12 +291,15 @@ LuciusBlackLowContrast
 
 
 "MBE Colors
-autocmd ColorScheme * highlight link MBENormal               Folded 
-autocmd ColorScheme * highlight link MBEChanged              ErrorMsg
-autocmd ColorScheme * highlight link MBEVisibleNormal        Title
-autocmd ColorScheme * highlight link MBEVisibleChanged       Error
-autocmd ColorScheme * highlight link MBEVisibleActiveNormal  SpellRare
-autocmd ColorScheme * highlight link MBEVisibleActiveChanged Todo
+augroup mbe_colors
+    au!
+    au ColorScheme * highlight link MBENormal               Folded 
+    au ColorScheme * highlight link MBEChanged              ErrorMsg
+    au ColorScheme * highlight link MBEVisibleNormal        Title
+    au ColorScheme * highlight link MBEVisibleChanged       Error
+    au ColorScheme * highlight link MBEVisibleActiveNormal  SpellRare
+    au ColorScheme * highlight link MBEVisibleActiveChanged Todo
+augroup END
 "hi link MBENormal               Folded
 "hi link MBEChanged              ErrorMsg
 "hi link MBEVisibleNormal        Title
@@ -319,6 +339,12 @@ if has("gui_running")
     endif
 endif
 " Source the vimrc file after saving it
-autocmd bufwritepost .vimrc source ~/.vimrc
+augroup vimrc_load
+    au!
+    au bufwritepost .vimrc source ~/.vimrc
+augroup END
 
 " ========== END Gvim Settings ==========
+
+" ========== XH1 make debugging =========
+set errorformat=%f:%l:%m,%DEntering\ dir\ '%f',%XLeaving\ dir

@@ -1,0 +1,3 @@
+--language-force=make
+--langmap=make:([Mm]akefile).mak
+--regex-make=/(^[a-z].+):/\1/t,targets/
