@@ -3,6 +3,7 @@
 " Make vim incompatbile to vi.
 set nocompatible
 set modelines=0
+filetype plugin indent on
 
 
 "Changing Leader Key Needs to be done first
@@ -69,7 +70,11 @@ let g:did_minibufexplorer_syntax_inits = 1
 Bundle 'kien/ctrlp.vim'
 " ctrlp settings
 " ignore virtual environments
-let g:ctrlp_custom_ignore = 'venv'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|jar)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 " dont set a limit to the files it will open
 let g:ctrlp_max_files = 0
 " tell ctrlp to create new files in the same window
