@@ -64,7 +64,7 @@ noremap <C-Right>    <C-W>l
 "let g:miniBufExplCycleArround = 0
 noremap <C-S-l>     :MBEbf<CR>
 noremap <C-S-h>     :MBEbb<CR>
-
+let g:did_minibufexplorer_syntax_inits = 1
 " ========== ctrlp Settings ================"
 Bundle 'kien/ctrlp.vim'
 " ctrlp settings
@@ -96,7 +96,7 @@ let g:goyo_margin_bottom = 20
 nnoremap <leader>f :Goyo<CR>
 
 " ============ C code browsing ============"
-Bundle 'vim-scripts/CCTree'
+"Bundle 'vim-scripts/CCTree'
 
 " =========== Grep Integration ============="
 Bundle 'yegappan/grep'
@@ -118,10 +118,10 @@ endif
 Bundle 'tpope/vim-fugitive'
 
 " =========== DirDiff Integration ===="
-Bundle 'vim-scripts/DirDiff.vim'
+"Bundle 'vim-scripts/DirDiff.vim'
 
 " =========== VCS control ============="
-Bundle 'vcscommand.vim'
+"Bundle 'vcscommand.vim'
 
 " =========== Pace plugin ============"
 Bundle 'rbuckley/pace.vim'
@@ -243,6 +243,9 @@ nnoremap <leader>v V`]
 nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
+" search and replace the text under the cursor
+nnoremap <leader>r :%s/\<<C-r><C-w>\>//g<left><left>
+nnoremap <leader>rc :%s/\<<C-r><C-w>\>//gc<left><left><left>
 
 " jj For Qicker Escaping between normal and editing mode.
 "inoremap jj <ESC>
