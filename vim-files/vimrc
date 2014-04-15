@@ -32,7 +32,9 @@ Bundle 'jonathanfilip/vim-lucius'
 Bundle 'bling/vim-airline'
 let g:airline_theme='wombat'
 let g:airline_powerline_fonts=1
+let g:airline#extensions#tmuxline#enabled=1
 set ttimeoutlen=50
+
 " ========== Tagbar Settings ================"
 Bundle 'majutsushi/tagbar'
 " Tagbar key bindings."
@@ -46,26 +48,25 @@ let g:tagbar_type_make = {
         \ 't:targets',
     \ ],
 \ }
+
 " ========== NerdTree Settings ==============="
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 " Mapping to NERDTree
 nnoremap <C-n> :NERDTreeToggle<cr>
 let NERDTreeIgnore=['\~$', '\.pyc$']
+let NERDTreeShowBookmarks = 1 
 
 " ======= MiniBufExplorer Settings =========="
 Bundle 'fholgado/minibufexpl.vim'
 " Mini Buffer some settigns."
-" window navigation
-noremap <C-Up>       <C-W>k
-noremap <C-Down>     <C-W>j
-noremap <C-Left>     <C-W>h
-noremap <C-Right>    <C-W>l
+
 " buffer navigation
-"let g:miniBufExplCycleArround = 0
-noremap <C-S-l>     :MBEbf<CR>
-noremap <C-S-h>     :MBEbb<CR>
-let g:did_minibufexplorer_syntax_inits = 1
+let g:miniBufExplCycleArround = 0
+"noremap <C-S-l>     :MBEbf<CR>
+"noremap <C-S-h>     :MBEbb<CR>
+"let g:did_minibufexplorer_syntax_inits = 1
+
 " ========== ctrlp Settings ================"
 Bundle 'kien/ctrlp.vim'
 " ctrlp settings
@@ -86,6 +87,21 @@ let g:ctrlp_open_new_file = 'r'
 let g:ctrlp_use_caching = 1 
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+
+" ============== promptline ================"
+"Bundle 'edkolev/promptline.vim'
+
+" ============== tmux status line  ================"
+Bundle 'edkolev/tmuxline.vim'
+let g:tmuxline_preset = {
+    \'a'    : '#(whoami)',
+    \'b'    : '(#P)#W',
+    \'c'    : '#h',
+    \'win'  : '#I #W',
+    \'cwin' : '#I #W',
+    \'x'    : '%a',
+    \'y'    : '(#P)#W %R',
+    \'z'    : '#S'}
 
 " ============== Snipmate ==================="
 Bundle 'msanders/snipmate.vim'
@@ -128,6 +144,9 @@ Bundle 'tpope/vim-fugitive'
 " =========== VCS control ============="
 "Bundle 'vcscommand.vim'
 
+" ========== tmux integration ========='
+Bundle 'christoomey/vim-tmux-navigator'
+
 " =========== Pace plugin ============"
 Bundle 'rbuckley/pace.vim'
 
@@ -160,6 +179,12 @@ set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
+
+" window navigation
+noremap <C-Up>       <C-W>k
+noremap <C-Down>     <C-W>j
+noremap <C-Left>     <C-W>h
+noremap <C-Right>    <C-W>l
 
 "set relativenumbee
 set number
@@ -246,6 +271,7 @@ nnoremap <leader>v V`]
 
 " ,ev Shortcut to edit and source .vimrc file on the fly on a vertical window.
 nnoremap <leader>ev :e $MYVIMRC<cr>
+nnoremap <leader>et :e ~/.dotfiles/tmux/tmux.conf<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " search and replace the text under the cursor
@@ -254,14 +280,15 @@ nnoremap <leader>rc :%s/\<<C-r><C-w>\>//gc<left><left><left>
 
 " jj For Qicker Escaping between normal and editing mode.
 "inoremap jj <ESC>
-
+" set working directory to that of the current buffer
+nnoremap <leader>h :cd %:p:h<CR>
 
 " Working with split screen nicely
 " Resize Split When the window is resized"
-augroup resize
-    au!
-    au VimResized * :wincmd =
-augroup END
+"augroup resize
+"    au!
+"    au VimResized * :wincmd =
+"augroup END
 
 
 " Wildmenu completion "
@@ -291,29 +318,29 @@ augroup END
 nnoremap g; g;zz
 
 " colorscheme settings
+"MBE Colors
+"augroup mbe_colors
+"    au!
+"   au ColorScheme * highlight link MBENormal               Folded 
+"    au ColorScheme * highlight link MBEChanged              ErrorMsg
+"    au ColorScheme * highlight link MBEVisibleNormal        Title
+"    au ColorScheme * highlight link MBEVisibleChanged       Error
+"    au ColorScheme * highlight link MBEVisibleActiveNormal  SpellRare
+"    au ColorScheme * highlight link MBEVisibleActiveChanged Todo
+"augroup END
+hi link MBENormal               Folded
+hi link MBEChanged              ErrorMsg
+hi link MBEVisibleNormal        Title
+hi link MBEVisibleChanged       Error
+hi link MBEVisibleActiveNormal  SpellRare
+hi link MBEVisibleActiveChanged Todo 
+
 set t_Co=256
 syntax enable
 set background=dark
 colorscheme lucius
 LuciusBlackLowContrast
 
-
-"MBE Colors
-augroup mbe_colors
-    au!
-    au ColorScheme * highlight link MBENormal               Folded 
-    au ColorScheme * highlight link MBEChanged              ErrorMsg
-    au ColorScheme * highlight link MBEVisibleNormal        Title
-    au ColorScheme * highlight link MBEVisibleChanged       Error
-    au ColorScheme * highlight link MBEVisibleActiveNormal  SpellRare
-    au ColorScheme * highlight link MBEVisibleActiveChanged Todo
-augroup END
-"hi link MBENormal               Folded
-"hi link MBEChanged              ErrorMsg
-"hi link MBEVisibleNormal        Title
-"hi link MBEVisibleChanged       Error
-"hi link MBEVisibleActiveNormal  SpellRare
-"hi link MBEVisibleActiveChanged Todo 
 
 " diff settings for easy toggle
 nnoremap <silent> <leader>df :call DiffToggle()<CR>
@@ -355,4 +382,4 @@ augroup END
 " ========== END Gvim Settings ==========
 
 " ========== XH1 make debugging =========
-set errorformat=%f:%l:%m,%DEntering\ dir\ '%f',%XLeaving\ dir
+set errorformat+=%f:%l:%m,%DEntering\ dir\ '%f',%XLeaving\ dir\ '%f'
