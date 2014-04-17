@@ -63,9 +63,9 @@ Bundle 'fholgado/minibufexpl.vim'
 " Mini Buffer some settigns."
 
 " buffer navigation
-let g:miniBufExplCycleArround = 0
-"noremap <C-S-l>     :MBEbf<CR>
-"noremap <C-S-h>     :MBEbb<CR>
+let g:miniBufExplCycleArround = 1
+nnoremap <leader><Tab>     :MBEbf<CR>
+nnoremap <leader><S-Tab>     :MBEbb<CR>
 "let g:did_minibufexplorer_syntax_inits = 1
 
 " ========== ctrlp Settings ================"
@@ -105,7 +105,7 @@ let g:tmuxline_preset = {
     \'z'    : '#S'}
 
 " ============== Snipmate ==================="
-Bundle 'msanders/snipmate.vim'
+"Bundle 'msanders/snipmate.vim'
 
 " ============= nginx highlighting ==========="
 Bundle 'vim-scripts/nginx.vim'
@@ -143,7 +143,7 @@ Bundle 'tpope/vim-fugitive'
 "Bundle 'vim-scripts/DirDiff.vim'
 
 " =========== VCS control ============="
-"Bundle 'vcscommand.vim'
+Bundle 'vcscommand.vim'
 
 " ========== tmux integration ========='
 Bundle 'christoomey/vim-tmux-navigator'
@@ -175,6 +175,9 @@ set wildmenu
 set wildmode=list:longest
 set visualbell
 
+set nobackup
+set noswapfile
+
 set cursorline
 set ttyfast
 set ruler
@@ -186,6 +189,9 @@ noremap <C-Up>       <C-W>k
 noremap <C-Down>     <C-W>j
 noremap <C-Left>     <C-W>h
 noremap <C-Right>    <C-W>l
+
+" allows to sudo w when you forget to before hand
+cmap w!! w !sudo tee % >/dev/null
 
 "set relativenumbee
 set number
@@ -345,15 +351,30 @@ LuciusBlackLowContrast
 
 " diff settings for easy toggle
 nnoremap <silent> <leader>df :call DiffToggle()<CR>
-
 function! DiffToggle()
     if &diff
         diffoff
     else
         diffthis
     endif
-:endfunction
+endfunction
 
+" switch between terminal and vim mouse modes
+noremap <F10> :call ToggleMouse()<CR>
+function! ToggleMouse()
+    if !exists("s:old_mouse")
+        let s:old_mouse="a"
+    endif
+
+    if &mouse == ""
+        let &mouse = s:old_mouse
+        echo "Mouse is for Vim (" . &mouse . ")"
+    else
+        let s:old_mouse = &mouse
+        let &mouse=""
+        echo "Mouse is for Terminal"
+    endif
+endfunction
 " =========== END Basic Vim Settings ===========
 
 
