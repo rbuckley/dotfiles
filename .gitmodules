@@ -7,3 +7,6 @@
 [submodule "utils/ag/src"]
 	path = utils/ag/src
 	url = git://github.com/ggreer/the_silver_searcher.git
+[submodule "utils/sack"]
+	path = utils/sack
+	url = https://github.com/sampson-chen/sack

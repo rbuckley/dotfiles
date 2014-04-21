@@ -12,6 +12,7 @@ let mapleader = ","
 " OS detection
 let g:os_windows = (has('win16') || has('win32') || has('win64')) && &shellcmdflag =~ '/'
 let g:os_cygwin = has('win32unix')
+let g:has_ag = executable('ag')
 
 let s:vimDir='~/.vim'
 if g:os_windows
@@ -66,11 +67,9 @@ Bundle 'fholgado/minibufexpl.vim'
 let g:miniBufExplCycleArround = 1
 nnoremap <leader><Tab>     :MBEbf<CR>
 nnoremap <leader><S-Tab>     :MBEbb<CR>
-"let g:did_minibufexplorer_syntax_inits = 1
 
 " ========== ctrlp Settings ================"
 Bundle 'kien/ctrlp.vim'
-" ctrlp settings
 " ignore virtual environments
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
@@ -81,13 +80,15 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_max_files = 0
 " tell ctrlp to create new files in the same window
 let g:ctrlp_open_new_file = 'r'
-" increase the results from 10 to 40
-" on second thought dont, slowed everything done toomuch
-" let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:40,results:40'
-" allow cross session caching
-let g:ctrlp_use_caching = 1 
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+if g:has_ag
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    let g:ctrlp_use_caching = 0
+else
+    let g:ctrlp_use_caching = 1 
+    let g:ctrlp_clear_cache_on_exit = 0
+    let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+endif
 
 " ============== promptline ================"
 "Bundle 'edkolev/promptline.vim'
@@ -123,6 +124,12 @@ nnoremap <leader>f :Goyo<CR>
 " =========== Grep Integration ============="
 Bundle 'yegappan/grep'
 nnoremap <silent> <leader>mm :Rgrep<CR>
+if g:has_ag
+    let g:Grep_Path = 'ag'
+    let g:Fgrep_Path = 'ag'
+    let g:Egrep_Path = 'ag'
+endif
+
 
 " =========== Yankstack for copy pasting ====="
 "Bundle 'maxbrunsfeld/vim-yankstack'
