@@ -4,3 +4,6 @@
 [submodule "vim-files/fonts/consolas"]
 	path = vim-files/fonts/consolas
 	url = https://github.com/runsisi/consolas-font-for-powerline
+[submodule "utils/ag/src"]
+	path = utils/ag/src
+	url = git://github.com/ggreer/the_silver_searcher.git
