@@ -80,6 +80,15 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_max_files = 0
 " tell ctrlp to create new files in the same window
 let g:ctrlp_open_new_file = 'r'
+
+" lazy delay so i can finish typeing before search starts
+let g:ctrlp_lazy_update = 1
+
+" set a marker for root src dirs
+let g:ctrlp_root_markers = ['.pace']
+let g:ctrlp_working_path_mode = 'ra'
+
+" use the silver searcher if it is available
 if g:has_ag
     set grepprg=ag\ --nogroup\ --nocolor
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
