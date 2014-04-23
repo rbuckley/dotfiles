@@ -53,7 +53,7 @@ let g:tagbar_type_make = {
 
 " ========== NerdTree Settings ==============="
 Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
+"Bundle 'scrooloose/nerdcommenter'
 " Mapping to NERDTree
 nnoremap <C-n> :NERDTreeToggle<cr>
 let NERDTreeIgnore=['\~$', '\.pyc$']
@@ -61,12 +61,13 @@ let NERDTreeShowBookmarks = 1
 
 " ======= MiniBufExplorer Settings =========="
 Bundle 'fholgado/minibufexpl.vim'
-" Mini Buffer some settigns."
 
 " buffer navigation
 let g:miniBufExplCycleArround = 1
 nnoremap <leader><Tab>     :MBEbf<CR>
 nnoremap <leader><S-Tab>     :MBEbb<CR>
+" close current buffer but preserve window
+nnoremap <leader>x :MBEbd<CR>
 
 " ========== ctrlp Settings ================"
 Bundle 'kien/ctrlp.vim'
@@ -89,9 +90,9 @@ let g:ctrlp_root_markers = ['.pace']
 let g:ctrlp_working_path_mode = 'ra'
 
 " use the silver searcher if it is available
-if g:has_ag
+if 0 "g:has_ag
     set grepprg=ag\ --nogroup\ --nocolor
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
     let g:ctrlp_use_caching = 0
 else
     let g:ctrlp_use_caching = 1 
@@ -163,6 +164,9 @@ Bundle 'vcscommand.vim'
 
 " ========== tmux integration ========='
 Bundle 'christoomey/vim-tmux-navigator'
+
+" =========== window swapping ========'
+Bundle 'wesQ3/vim-windowswap'
 
 " =========== Pace plugin ============"
 Bundle 'rbuckley/pace.vim'
@@ -247,10 +251,10 @@ nnoremap <leader><space> :noh<cr>
 "vnoremap <tab> %
 
 
-" Make Vim to handle long lines nicely.
-set wrap
-set textwidth=79
-set formatoptions=qrn1
+" do not wrap unless i tell you to wrap
+set nowrap
+"set textwidth=79
+"set formatoptions=qrn1
 "set colorcolumn=79
 
 " To  show special characters in Vim
@@ -304,7 +308,7 @@ nnoremap <leader>rc :%s/\<<C-r><C-w>\>//gc<left><left><left>
 " jj For Qicker Escaping between normal and editing mode.
 "inoremap jj <ESC>
 " set working directory to that of the current buffer
-nnoremap <leader>h :cd %:p:h<CR>
+nnoremap <leader>h :cd %:p:h<CR>:pwd<CR>
 
 " Working with split screen nicely
 " Resize Split When the window is resized"
@@ -334,7 +338,16 @@ augroup line_return
     au!
     au BufReadPost *
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \ execute 'normal! g`"zvzz' |
+        \   execute 'normal! g`"zvzz' |
+        \ endif
+augroup END
+
+" any help window that is opened is closed with just q
+augroup close_help_q
+    au!
+    au BufWinEnter *
+        \ if &buftype=='help' |
+        \   noremap <buffer> q :bd<CR> | 
         \ endif
 augroup END
 
@@ -351,12 +364,12 @@ nnoremap g; g;zz
 "    au ColorScheme * highlight link MBEVisibleActiveNormal  SpellRare
 "    au ColorScheme * highlight link MBEVisibleActiveChanged Todo
 "augroup END
-hi link MBENormal               Folded
-hi link MBEChanged              ErrorMsg
-hi link MBEVisibleNormal        Title
-hi link MBEVisibleChanged       Error
-hi link MBEVisibleActiveNormal  SpellRare
-hi link MBEVisibleActiveChanged Todo 
+"hi link MBENormal               Folded
+"hi link MBEChanged              ErrorMsg
+"hi link MBEVisibleNormal        Title
+"hi link MBEVisibleChanged       Error
+"hi link MBEVisibleActiveNormal  SpellRare
+"hi link MBEVisibleActiveChanged Todo 
 
 set t_Co=256
 syntax enable
@@ -367,6 +380,8 @@ LuciusBlackLowContrast
 
 " diff settings for easy toggle
 nnoremap <silent> <leader>df :call DiffToggle()<CR>
+nnoremap  <leader>dg :diffget<CR>
+nnoremap  <leader>dp :diffput<CR>
 function! DiffToggle()
     if &diff
         diffoff
