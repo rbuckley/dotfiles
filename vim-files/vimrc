@@ -116,7 +116,7 @@ let g:tmuxline_preset = {
     \'z'    : '#S'}
 
 " ============== Snipmate ==================="
-"Bundle 'msanders/snipmate.vim'
+Bundle 'msanders/snipmate.vim'
 
 " ============= nginx highlighting ==========="
 Bundle 'vim-scripts/nginx.vim'
@@ -162,11 +162,14 @@ Bundle 'tpope/vim-fugitive'
 " =========== VCS control ============="
 Bundle 'vcscommand.vim'
 
-" ========== tmux integration ========='
+" ========== tmux integration ========r"
 Bundle 'christoomey/vim-tmux-navigator'
 
-" =========== window swapping ========'
+" =========== window swapping ========"
 Bundle 'wesQ3/vim-windowswap'
+
+" =========== Python Mode ============="
+Bundle 'klen/python-mode'
 
 " =========== Pace plugin ============"
 Bundle 'rbuckley/pace.vim'
@@ -252,7 +255,7 @@ nnoremap <leader><space> :noh<cr>
 
 
 " do not wrap unless i tell you to wrap
-set nowrap
+set wrap
 "set textwidth=79
 "set formatoptions=qrn1
 "set colorcolumn=79
@@ -366,7 +369,7 @@ nnoremap g; g;zz
 "augroup END
 "hi link MBENormal               Folded
 "hi link MBEChanged              ErrorMsg
-"hi link MBEVisibleNormal        Title
+"ai link MBEVisibleNormal        Title
 "hi link MBEVisibleChanged       Error
 "hi link MBEVisibleActiveNormal  SpellRare
 "hi link MBEVisibleActiveChanged Todo 
