@@ -64,8 +64,8 @@ Bundle 'fholgado/minibufexpl.vim'
 
 " buffer navigation
 let g:miniBufExplCycleArround = 1
-nnoremap <leader><Tab>     :MBEbf<CR>
-nnoremap <leader><S-Tab>     :MBEbb<CR>
+nnoremap <leader><Tab>     :MBEbb<CR>
+nnoremap <leader><S-Tab>     :MBEbf<CR>
 " close current buffer but preserve window
 nnoremap <leader>x :MBEbd<CR>
 
@@ -129,7 +129,7 @@ let g:goyo_margin_bottom = 20
 nnoremap <leader>f :Goyo<CR>
 
 " ============ C code browsing ============"
-"Bundle 'vim-scripts/CCTree'
+Bundle 'vim-scripts/CCTree'
 
 " =========== Grep Integration ============="
 Bundle 'yegappan/grep'
@@ -312,6 +312,9 @@ nnoremap <leader>rc :%s/\<<C-r><C-w>\>//gc<left><left><left>
 "inoremap jj <ESC>
 " set working directory to that of the current buffer
 nnoremap <leader>h :cd %:p:h<CR>:pwd<CR>
+
+" double click to highlight a word under cursor
+noremap <2-LeftMouse> *
 
 " Working with split screen nicely
 " Resize Split When the window is resized"

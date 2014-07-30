@@ -41,6 +41,9 @@ shopt -s extglob        # Necessary for programmable completion.
 shopt -u mailwarn
 unset MAILCHECK         # Don't want my shell to warn me of incoming mail.
 
+# home for virtual env
+export WORKON_HOME=~/Envs
+
 #-------------------------------------------------------------
 # Greeting, motd etc...
 #-------------------------------------------------------------
