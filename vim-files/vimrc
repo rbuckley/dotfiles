@@ -139,7 +139,8 @@ if g:has_ag
     let g:Fgrep_Path = 'ag'
     let g:Egrep_Path = 'ag'
 endif
-
+" =========== Javascript plugin =========="
+Bundle 'lukaszb/vim-web-indent'
 
 " =========== Yankstack for copy pasting ====="
 "Bundle 'maxbrunsfeld/vim-yankstack'
