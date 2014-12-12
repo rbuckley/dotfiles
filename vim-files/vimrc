@@ -53,7 +53,7 @@ let g:tagbar_type_make = {
 
 " ========== NerdTree Settings ==============="
 Bundle 'scrooloose/nerdtree'
-"Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdcommenter'
 " Mapping to NERDTree
 nnoremap <C-n> :NERDTreeToggle<cr>
 let NERDTreeIgnore=['\~$', '\.pyc$']
@@ -171,6 +171,28 @@ Bundle 'wesQ3/vim-windowswap'
 
 " =========== Python Mode ============="
 Bundle 'klen/python-mode'
+let g:pymode_rope_goto_definition_bind = '<leader>g'
+
+" =========== GoldenView (resizing panes) ============="
+"Bundle 'zhaocai/GoldenView.vim'
+"let g:goldenview__enable_default_mapping = 0
+
+" split to tiled windows
+"nmap <silent> <C-L> <Plug>GoldenViewSplit
+
+" switch current window with main pain and back
+"nmap <silent> <F8> <Plug>GoldenViewSwitchMain
+"nmap <silent> <S-F8> <Plug>GoldenViewSwitchToggle
+
+" =========== Jedi =================="
+"Bundle 'davidhalter/jedi-vim'
+
+" =========== Python indent plugin =========="
+"Bundle 'hynek/vim-python-pep8-indent'
+
+" =========== Python indent plugin =========="
+Bundle 'vim-scripts/CVSconflict'
+nnoremap <leader>cc :CVSconflict<CR>
 
 " =========== Pace plugin ============"
 Bundle 'rbuckley/pace.vim'
@@ -309,20 +331,21 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>r :%s/\<<C-r><C-w>\>//g<left><left>
 nnoremap <leader>rc :%s/\<<C-r><C-w>\>//gc<left><left><left>
 
+" search for text under visual selection
+vnoremap <silent> * :<C-U>
+   \ let old_reg=getreg('"')<Bar> let old_regtype=getregtype('"')<CR>
+   \ gvy/<C-R><C-R>=substitute(
+      \ escape(@", '/\.*$^~['), '\_s+', '\\_s\\+', 'g')<CR><CR>
+   \ gV:call setreg('"', old_reg, old_regtype)<CR>
+
+
 " jj For Qicker Escaping between normal and editing mode.
 "inoremap jj <ESC>
 " set working directory to that of the current buffer
 nnoremap <leader>h :cd %:p:h<CR>:pwd<CR>
 
 " double click to highlight a word under cursor
-noremap <2-LeftMouse> *
-
-" Working with split screen nicely
-" Resize Split When the window is resized"
-"augroup resize
-"    au!
-"    au VimResized * :wincmd =
-"augroup END
+"noremap <2-LeftMouse> *
 
 
 " Wildmenu completion "
