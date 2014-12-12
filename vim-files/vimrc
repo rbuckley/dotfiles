@@ -13,10 +13,15 @@ let mapleader = ","
 let g:os_windows = (has('win16') || has('win32') || has('win64')) && &shellcmdflag =~ '/'
 let g:os_cygwin = has('win32unix')
 let g:has_ag = executable('ag')
-
+if has("unix")
+   let s:uname = system("uname -s")
+   if s:uname == "Darwin"
+      g:os_x = 1
+   endif
+endif
 let s:vimDir='~/.vim'
 if g:os_windows
-    let s:vimDir='~/vimfiles'
+   let s:vimDir='~/vimfiles'
 endif
 
 " ============ Bundle settings =============="
@@ -45,11 +50,11 @@ imap <leader>l <ESC>:TagbarToggle<cr>i
 let g:tagbar_autofocus = 1
 
 let g:tagbar_type_make = {
-    \ 'kinds' : [
-        \ 'm:macros',
-        \ 't:targets',
-    \ ],
-\ }
+         \ 'kinds' : [
+         \ 'm:macros',
+         \ 't:targets',
+         \ ],
+         \ }
 
 " ========== NerdTree Settings ==============="
 Bundle 'scrooloose/nerdtree'
@@ -73,10 +78,10 @@ nnoremap <leader>x :MBEbd<CR>
 Bundle 'kien/ctrlp.vim'
 " ignore virtual environments
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|jar)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
+         \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+         \ 'file': '\v\.(exe|so|dll|jar)$',
+         \ 'link': 'some_bad_symbolic_links',
+         \ }
 " dont set a limit to the files it will open
 let g:ctrlp_max_files = 0
 " tell ctrlp to create new files in the same window
@@ -91,13 +96,13 @@ let g:ctrlp_working_path_mode = 'ra'
 
 " use the silver searcher if it is available
 if 0 "g:has_ag
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-    let g:ctrlp_use_caching = 0
+   set grepprg=ag\ --nogroup\ --nocolor
+   let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+   let g:ctrlp_use_caching = 0
 else
-    let g:ctrlp_use_caching = 1 
-    let g:ctrlp_clear_cache_on_exit = 0
-    let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+   let g:ctrlp_use_caching = 1 
+   let g:ctrlp_clear_cache_on_exit = 0
+   let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 endif
 
 " ============== promptline ================"
@@ -106,14 +111,14 @@ endif
 " ============== tmux status line  ================"
 Bundle 'edkolev/tmuxline.vim'
 let g:tmuxline_preset = {
-    \'a'    : '#(whoami)',
-    \'b'    : '(#P)#W',
-    \'c'    : '#h',
-    \'win'  : '#I #W',
-    \'cwin' : '#I #W',
-    \'x'    : '%a',
-    \'y'    : '(#P)#W %R',
-    \'z'    : '#S'}
+         \'a'    : '#(whoami)',
+         \'b'    : '(#P)#W',
+         \'c'    : '#h',
+         \'win'  : '#I #W',
+         \'cwin' : '#I #W',
+         \'x'    : '%a',
+         \'y'    : '(#P)#W %R',
+         \'z'    : '#S'}
 
 " ============== Snipmate ==================="
 Bundle 'msanders/snipmate.vim'
@@ -135,12 +140,20 @@ Bundle 'vim-scripts/CCTree'
 Bundle 'yegappan/grep'
 nnoremap <silent> <leader>mm :Rgrep<CR>
 if g:has_ag
-    let g:Grep_Path = 'ag'
-    let g:Fgrep_Path = 'ag'
-    let g:Egrep_Path = 'ag'
+   let g:Grep_Path = 'ag'
+   let g:Fgrep_Path = 'ag'
+   let g:Egrep_Path = 'ag'
 endif
-" =========== Javascript plugin =========="
-Bundle 'lukaszb/vim-web-indent'
+" =========== AngularJS plugins =========="
+Bundle 'burnettk/vim-angular'
+
+Bundle 'pangloss/vim-javascript'
+
+Bundle 'othree/javascript-libraries-syntax.vim'
+
+Bundle 'scrooloose/syntastic'
+
+Bundle 'claco/jasmine.vim'
 
 " =========== Yankstack for copy pasting ====="
 "Bundle 'maxbrunsfeld/vim-yankstack'
@@ -150,8 +163,8 @@ Bundle 'lukaszb/vim-web-indent'
 
 " =========== Outlook Integration ===="
 if g:os_windows 
-    Bundle 'vim-scripts/OutlookVim'
-    let g:outlook_supported_body_format = 'html'
+   Bundle 'vim-scripts/OutlookVim'
+   let g:outlook_supported_body_format = 'html'
 endif
 
 " =========== Git Integration ===="
@@ -194,6 +207,9 @@ let g:pymode_rope_goto_definition_bind = '<leader>g'
 Bundle 'vim-scripts/CVSconflict'
 nnoremap <leader>cc :CVSconflict<CR>
 
+" =========== script indenting ============="
+Bundle 'vim-scripts/sh.vim--Cla' 
+
 " =========== Pace plugin ============"
 Bundle 'rbuckley/pace.vim'
 
@@ -205,8 +221,8 @@ set expandtab
 
 " More Windows only settings
 if g:os_windows
-"   to allow swap files to be written in the temp directory
-    set directory=.,$TEMP
+   "   to allow swap files to be written in the temp directory
+   set directory=.,$TEMP
 
 endif
 
@@ -365,20 +381,20 @@ set wildignore+=*.orig "Merge resolution files"
 
 "Make Sure that Vim returns to the same line when we reopen a file"
 augroup line_return
-    au!
-    au BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \   execute 'normal! g`"zvzz' |
-        \ endif
+   au!
+   au BufReadPost *
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \   execute 'normal! g`"zvzz' |
+            \ endif
 augroup END
 
 " any help window that is opened is closed with just q
 augroup close_help_q
-    au!
-    au BufWinEnter *
-        \ if &buftype=='help' |
-        \   noremap <buffer> q :bd<CR> | 
-        \ endif
+   au!
+   au BufWinEnter *
+            \ if &buftype=='help' |
+            \   noremap <buffer> q :bd<CR> | 
+            \ endif
 augroup END
 
 nnoremap g; g;zz
@@ -413,53 +429,55 @@ nnoremap <silent> <leader>df :call DiffToggle()<CR>
 nnoremap  <leader>dg :diffget<CR>
 nnoremap  <leader>dp :diffput<CR>
 function! DiffToggle()
-    if &diff
-        diffoff
-    else
-        diffthis
-    endif
+   if &diff
+      diffoff
+   else
+      diffthis
+   endif
 endfunction
 
 " switch between terminal and vim mouse modes
 noremap <F10> :call ToggleMouse()<CR>
 function! ToggleMouse()
-    if !exists("s:old_mouse")
-        let s:old_mouse="a"
-    endif
+   if !exists("s:old_mouse")
+      let s:old_mouse="a"
+   endif
 
-    if &mouse == ""
-        let &mouse = s:old_mouse
-        echo "Mouse is for Vim (" . &mouse . ")"
-    else
-        let s:old_mouse = &mouse
-        let &mouse=""
-        echo "Mouse is for Terminal"
-    endif
+   if &mouse == ""
+      let &mouse = s:old_mouse
+      echo "Mouse is for Vim (" . &mouse . ")"
+   else
+      let s:old_mouse = &mouse
+      let &mouse=""
+      echo "Mouse is for Terminal"
+   endif
 endfunction
 " =========== END Basic Vim Settings ===========
 
 
 " =========== Gvim Settings =============
 if has("gui_running")
-    set lines=999 columns=999
-    set guioptions-=l
-    set guioptions-=L
-    set guioptions-=r
-    set guioptions-=R
-    set guioptions-=T
-    if g:os_windows
-        set guifont=Powerline_Consolas:h9:cANSI
-        set guioptions-=e
-        set guioptions-=m
-        set guioptions-=g
-    else
-        set guifont=Powerline\ Consolas\ 10
-    endif
+   set lines=999 columns=999
+   set guioptions-=l
+   set guioptions-=L
+   set guioptions-=r
+   set guioptions-=R
+   set guioptions-=T
+   if g:os_windows
+      set guifont=Powerline_Consolas:h9:cANSI
+      set guioptions-=e
+      set guioptions-=m
+      set guioptions-=g
+   elseif g:os_x
+      set guifont=Inconsolata-g\ for\ Powerline:h9
+   else
+      set guifont=Powerline\ Consolas\ 10
+   endif
 endif
 " Source the vimrc file after saving it
 augroup vimrc_load
-    au!
-    au bufwritepost .vimrc source ~/.vimrc
+   au!
+   au bufwritepost .vimrc source ~/.vimrc
 augroup END
 
 " ========== END Gvim Settings ==========
