@@ -63,8 +63,6 @@ if [ $TERM == "xterm" ]; then
 fi
 
 date
-
-TERM=xterm-256color
 				
 #=========================================================================
 # PROGRAMMABLE COMPLETION - ONLY SINCE BASH-2.04
@@ -139,3 +137,12 @@ extract(){
 grab() {
     sudo chown -R ${USER} ${1:-.}
 }
+
+#aa_256 ()
+#{
+#   ( x=`tput op` y=`printf %$((${COLUMNS}-6))s`;
+#   for i in {0..256}; do
+#      o=00$i;
+#      echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;
+#   done )
+#}
