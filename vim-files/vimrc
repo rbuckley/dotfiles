@@ -56,11 +56,10 @@ Plugin 'kien/ctrlp.vim'
 " ============== tmux status line  ================"
 Plugin 'edkolev/tmuxline.vim'
 
-" ============== Snipmate ==================="
-Plugin 'msanders/snipmate.vim'
-
-" ============= nginx highlighting ==========="
-"Plugin 'vim-scripts/nginx.vim'
+" ============== Ultisnip ==================="
+Plugin 'SirVer/ultisnips'
+" standard snippets
+Plugin 'honza/vim-snippets'
 
 " =========== Focus on stuff =============="
 Plugin 'junegunn/goyo.vim'
@@ -83,6 +82,10 @@ Plugin 'christoomey/vim-tmux-navigator'
 " =========== window swapping ========"
 Plugin 'wesQ3/vim-windowswap'
 
+" =========== Arduino ========"
+" Snippets and syntax
+Plugin 'sudar/vim-arduino-snippets'
+Plugin 'sudar/vim-arduino-syntax'
 
 call vundle#end()
 filetype plugin indent on
