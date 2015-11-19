@@ -1,6 +1,6 @@
 [submodule "vim-files/vim/bundle/vundle"]
 	path = vim-files/vim/bundle/vundle
-	url = https://github.com/gmarik/Vundle.vim
+	url = https://github.com/VundleVim/Vundle.vim
 [submodule "vim-files/fonts/consolas"]
 	path = vim-files/fonts/consolas
 	url = https://github.com/runsisi/consolas-font-for-powerline
