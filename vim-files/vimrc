@@ -35,7 +35,8 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'jonathanfilip/vim-lucius'
 
 " =========== Powerline (statusbar) ============="
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " ========== Tagbar Settings ================"
 Plugin 'majutsushi/tagbar'
@@ -57,7 +58,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'edkolev/tmuxline.vim'
 
 " ============== Ultisnip ==================="
-Plugin 'SirVer/ultisnips'
+"Plugin 'SirVer/ultisnips'
 " standard snippets
 Plugin 'honza/vim-snippets'
 
@@ -72,6 +73,7 @@ Plugin 'yegappan/grep'
 
 " =========== Git Integration ===="
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-unimpaired'
 
 " =========== VCS control ============="
 Plugin 'vcscommand.vim'
@@ -86,6 +88,9 @@ Plugin 'wesQ3/vim-windowswap'
 " Snippets and syntax
 Plugin 'sudar/vim-arduino-snippets'
 Plugin 'sudar/vim-arduino-syntax'
+
+" =========== DiffDirr =============="
+Plugin 'will133/vim-dirdiff'
 
 call vundle#end()
 filetype plugin indent on
