@@ -40,6 +40,18 @@ Plugin 'vim-airline/vim-airline-themes'
 
 " ========== Tagbar Settings ================"
 Plugin 'majutsushi/tagbar'
+let g:tagbar_type_groovy = {
+    \ 'ctagstype' : 'groovy',
+    \ 'kinds'     : [
+        \ 'p:package:1',
+        \ 'c:classes',
+        \ 'i:interfaces',
+        \ 't:traits',
+        \ 'e:enums',
+        \ 'm:methods',
+        \ 'f:fields:1'
+    \ ]
+\ }
 
 " ========== NerdTree Settings ==============="
 Plugin 'scrooloose/nerdtree'
@@ -66,7 +78,20 @@ Plugin 'honza/vim-snippets'
 Plugin 'junegunn/goyo.vim'
 
 " ============ C code browsing ============"
-Plugin 'vim-scripts/CCTree'
+Plugin 'hari-rangarajan/CCTree'
+
+
+" ============ bitbake ============"
+Plugin 'kergoth/vim-bitbake'
+
+let g:CCTreeKeyTraceForwardTree = '<C-/>>' 
+let g:CCTreeKeyTraceReverseTree = '<C-/><' 
+let g:CCTreeKeyHilightTree = '<C-l>'        " Static highlighting
+let g:CCTreeKeySaveWindow = '<C-/>y' 
+let g:CCTreeKeyToggleWindow = '<C-/>w' 
+let g:CCTreeKeyCompressTree = 'zs'     " Compress call-tree 
+let g:CCTreeKeyDepthPlus = '<C-/>=' 
+let g:CCTreeKeyDepthMinus = '<C-/>-'
 
 " =========== Grep Integration ============="
 Plugin 'yegappan/grep'
@@ -78,7 +103,7 @@ Plugin 'tpope/vim-unimpaired'
 " =========== VCS control ============="
 Plugin 'vcscommand.vim'
 
-" ========== tmux integration ========r"
+" ========== tmux integration ========"
 Plugin 'christoomey/vim-tmux-navigator'
 
 " =========== window swapping ========"
@@ -140,6 +165,8 @@ let g:ctrlp_open_new_file = 'r'
 
 " lazy delay so i can finish typeing before search starts
 let g:ctrlp_lazy_update = 1
+let g:ctrlp_root_markers = ['.arrs']
+let g:ctrlp_clear_cache_on_exit = 0
 
 " tmux configuration
 let g:tmuxline_preset = {
@@ -393,7 +420,7 @@ function! DiffToggle()
 endfunction
 
 " switch between terminal and vim mouse modes
-noremap <F10> :call ToggleMouse()<CR>
+noremap <silent> <leader>tm :call ToggleMouse()<CR>
 function! ToggleMouse()
    if !exists("s:old_mouse")
       let s:old_mouse="a"

@@ -6,6 +6,7 @@ umask 2
 
 export SVN_EDITOR=vim
 export EDITOR=vim
+export PATH=${PATH}:${HOME}/bin
 
 alias findf='find -iname \* | xargs grep -nH --color=auto '
 alias findc='find -iname \*.c -o -iname \*.cc -o -iname \*.cpp | xargs grep -nH --color=auto '
@@ -14,6 +15,10 @@ alias findh='find -iname \*.h | xargs grep -nH --color=auto '
 alias ..='cd ..'
 alias cd..='cd ..'
 
+alias ll='ls -lhA --color'
+alias ls='ls -CF --color'
+alias mkdir='mkdir -p'
+alias top='htop'
 
 #-------------------------------------------------------------
 # Some settings
@@ -41,8 +46,6 @@ shopt -s extglob        # Necessary for programmable completion.
 shopt -u mailwarn
 unset MAILCHECK         # Don't want my shell to warn me of incoming mail.
 
-# home for virtual env
-export WORKON_HOME=~/Envs
 
 #-------------------------------------------------------------
 # Greeting, motd etc...
@@ -138,11 +141,3 @@ grab() {
     sudo chown -R ${USER} ${1:-.}
 }
 
-#aa_256 ()
-#{
-#   ( x=`tput op` y=`printf %$((${COLUMNS}-6))s`;
-#   for i in {0..256}; do
-#      o=00$i;
-#      echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;
-#   done )
-#}

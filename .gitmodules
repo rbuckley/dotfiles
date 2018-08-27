@@ -10,3 +10,9 @@
 [submodule "utils/sack"]
 	path = utils/sack
 	url = https://github.com/sampson-chen/sack
+[submodule "tmux/plugins/tpm"]
+	path = tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
+[submodule "vim-files/vim/bundle/bitbake"]
+	path = vim-files/vim/bundle/bitbake
+	url = https://github.com/kergoth/vim-bitbake
