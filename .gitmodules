@@ -16,3 +16,6 @@
 [submodule "vim-files/vim/bundle/bitbake"]
 	path = vim-files/vim/bundle/bitbake
 	url = https://github.com/kergoth/vim-bitbake
+[submodule "git-scripts"]
+	path = git-scripts
+	url = https://github.com/jwiegley/git-scripts.git

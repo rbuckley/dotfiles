@@ -6,7 +6,7 @@ umask 2
 
 export SVN_EDITOR=vim
 export EDITOR=vim
-export PATH=${PATH}:${HOME}/bin
+export PATH=${PATH}:${HOME}/bin:~/.dotfiles/git-scripts
 
 alias findf='find -iname \* | xargs grep -nH --color=auto '
 alias findc='find -iname \*.c -o -iname \*.cc -o -iname \*.cpp | xargs grep -nH --color=auto '

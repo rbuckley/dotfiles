@@ -52,6 +52,7 @@ let g:tagbar_type_groovy = {
         \ 'f:fields:1'
     \ ]
 \ }
+set tags=./tags,tags;$HOME
 
 " ========== NerdTree Settings ==============="
 Plugin 'scrooloose/nerdtree'
@@ -117,8 +118,15 @@ Plugin 'sudar/vim-arduino-syntax'
 " =========== DiffDirr =============="
 Plugin 'will133/vim-dirdiff'
 
+" ======== ifdef-highlighting  ======"
+Plugin 'vim-scripts/ifdef-highlighting'
+
 call vundle#end()
 filetype plugin indent on
+
+" tell vim that xc files are actually c
+" XMOS stuff
+au BufNewFile,BufRead *.xc set filetype=c
 
 " Powerline settings "
 let g:airline_theme='wombat'
@@ -184,7 +192,7 @@ let g:goyo_margin_top = 20
 let g:goyo_margin_bottom = 20
 nnoremap <leader>f :Goyo<CR>
 
-nnoremap <silent> <leader>mm :Rgrep<CR>
+nnoremap <silent> <leader>mm :Ag<CR>
 if g:has_ag
    let g:Grep_Path = 'ag'
    let g:Fgrep_Path = 'ag'
@@ -235,7 +243,7 @@ noremap <C-Left>     <C-W>h
 noremap <C-Right>    <C-W>l
 
 " allows to sudo w when you forget to before hand
-cmap w!! w !sudo tee % >/dev/null
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 "set relativenumbee
 set number
@@ -338,11 +346,12 @@ vnoremap <silent> * :<C-U>
    \ gV:call setreg('"', old_reg, old_regtype)<CR>
 
 
-" jj For Qicker Escaping between normal and editing mode.
+" jj For Quicker Escaping between normal and editing mode.
 "inoremap jj <ESC>
 " set working directory to that of the current buffer
-nnoremap <leader>h :cd %:p:h<CR>:pwd<CR>
-
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+" cd to the directory of the file in the current window if not /tmp
+" autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | silent! lcd %:p:h | endif
 " double click to highlight a word under cursor
 "noremap <2-LeftMouse> *
 
@@ -405,6 +414,8 @@ syntax enable
 set background=dark
 colorscheme lucius
 LuciusBlackLowContrast
+
+" autochdir settings
 
 
 " diff settings for easy toggle
