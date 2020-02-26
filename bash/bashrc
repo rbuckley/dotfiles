@@ -4,8 +4,8 @@ fi
 
 umask 2
 
-export SVN_EDITOR=vim
-export EDITOR=vim
+export SVN_EDITOR=nvim
+export EDITOR=nvim
 export PATH=${PATH}:${HOME}/bin:~/.dotfiles/git-scripts
 
 alias findf='find -iname \* | xargs grep -nH --color=auto '
@@ -19,6 +19,7 @@ alias ll='ls -lhA --color'
 alias ls='ls -CF --color'
 alias mkdir='mkdir -p'
 alias top='htop'
+alias vim='nvim'
 
 #-------------------------------------------------------------
 # Some settings
