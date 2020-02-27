@@ -1,12 +1,9 @@
-[submodule "utils/ag/src"]
-	path = utils/ag/src
-	url = git://github.com/ggreer/the_silver_searcher.git
-[submodule "utils/sack"]
-	path = utils/sack
-	url = https://github.com/sampson-chen/sack
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
 [submodule "git-scripts"]
 	path = git-scripts
 	url = https://github.com/jwiegley/git-scripts.git
+[submodule "nerd-fonts"]
+	path = nerd-fonts
+	url = https://github.com/ryanoasis/nerd-fonts.git
