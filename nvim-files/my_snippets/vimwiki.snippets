@@ -2,10 +2,46 @@ snippet *
 	* [ ] ${1}
 endsnippet
 
-snippet d1f "Diarynote Tpl Full (Tomorrow)" w
-# [ ] `env LC_ALL=en_US.utf8 date --date="tomorrow" "+%y.%M.%D %a"`
+snippet dtemp "Insert Diary Template" 
+`env LC_ALL=en_US.utf8 date "+%a %D"`
 
-Completed Today:
-- ...
+= Quality =
+	- Sleep: ${1}
+	- Meals: ${2}
+	- Workout: ${3}
+	- Overall: ${4}
+
+= Habits =
+	* [ ] Workout
+	* [ ] Meditate
+	* [ ] 50 Pushups
+
+endsnippet
+
+snippet pcast "Podcast Section"
+
+= Podcast =
+- Show: *${1}*
+- Guest(s): *${2}*
+== Thoughts ==
+
+endsnippet
+
+snippet gnight "Thoughts on a game I played"
+
+= Games =
+- Game: *${1}*
+- Who Played: *${2}*
+- How fun? ${3}
+== Recap ==
+
+endsnippet
+
+snippet task
+	${1:title}${2: DETAIL=[[detail/`strftime("%Y%m%d_%H%M%S")`]]} LEVEL=${3:3} START=${4:`strftime("%Y-%m-%d")`} EXPIRE=${5:`strftime("%Y-%m-%d")`}
+endsnippet
+
+snippet detail
+	DETAIL=[[${1:detail/`strftime("%Y%m%d_%H%M%S")`}]]
 endsnippet
 
