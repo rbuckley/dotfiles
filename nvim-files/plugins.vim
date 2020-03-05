@@ -48,9 +48,11 @@ endfunction
 Plug 'edkolev/tmuxline.vim'
 
 " ============== Ultisnip ==================="
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " ============ vimwiki ============"
-"Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 
 " ============ bitbake ============"
 "Plug 'kergoth/vim-bitbake'
@@ -70,7 +72,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'christoomey/vim-tmux-navigator'
 
 " ========== calendar ========"
-"Plug 'mattn/calendar-vim'
+Plug 'mattn/calendar-vim'
 
 
 " ========== Rust ========"
