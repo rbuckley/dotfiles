@@ -4,36 +4,40 @@ endsnippet
 
 snippet dtemp "Insert Diary Template" 
 `env LC_ALL=en_US.utf8 date "+%a %D"`
+= ${1:title} =
 
-= Quality =
-	- Sleep: ${1}
-	- Meals: ${2}
-	- Workout: ${3}
-	- Overall: ${4}
+== Quality ==
+	- Sleep: ${2}
+	- Meals: ${3}
+	- Workout: ${4}
+	- Work: ${5}
+	- Overall: ${6}
 
-= Habits =
+== Habits ==
 	* [ ] Workout
 	* [ ] Meditate
 	* [ ] 50 Pushups
+	* [ ] Journaled
 
+== Journal ==
 endsnippet
 
 snippet pcast "Podcast Section"
 
-= Podcast =
+== Podcast ==
 - Show: *${1}*
 - Guest(s): *${2}*
-== Thoughts ==
+=== Thoughts ===
 
 endsnippet
 
 snippet gnight "Thoughts on a game I played"
 
-= Games =
+== Games ==
 - Game: *${1}*
 - Who Played: *${2}*
 - How fun? ${3}
-== Recap ==
+=== Recap ===
 
 endsnippet
 

@@ -597,7 +597,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "let my_wiki.path = '/export/personal/vimwiki/'
 "let my_wiki.path_html = '/export/personal/vimwiki_html/'
 "let g:vimwiki_list = [my_wiki]
-"let g:vimwiki_listsyms = '✗ ○ ◐ ● ✓'
+"let g:vimwiki_listsyms = '✗○◐●✓'
 
 "au BufNewFile /export/personal/vimwiki/diary/*.wiki :silent 0r !/export/personal/vimwiki/tools/gen_vimwiki_diary_template
 
