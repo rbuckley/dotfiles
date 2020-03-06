@@ -586,6 +586,20 @@ augroup END
 "set colorcolumn=79
 
 nnoremap <leader>date "=strftime("%x")<CR>P
+" UltiSnips
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "my_snippets"]
+let g:UltiSnipsExpandTrigger="<C-p>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" vimwiki
+"let my_wiki = {}
+"let my_wiki.path = '/export/personal/vimwiki/'
+"let my_wiki.path_html = '/export/personal/vimwiki_html/'
+"let g:vimwiki_list = [my_wiki]
+"let g:vimwiki_listsyms = '✗ ○ ◐ ● ✓'
+
+"au BufNewFile /export/personal/vimwiki/diary/*.wiki :silent 0r !/export/personal/vimwiki/tools/gen_vimwiki_diary_template
 
 " Source the vimrc file after saving it
 augroup vimrc_load

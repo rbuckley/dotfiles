@@ -49,6 +49,7 @@ Plug 'edkolev/tmuxline.vim'
 
 " ============== Ultisnip ==================="
 Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " ============ vimwiki ============"
 Plug 'vimwiki/vimwiki'
