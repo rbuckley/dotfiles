@@ -17,7 +17,7 @@ if has("unix")
       g:os_x = 1
    endif
 endif
-let s:nvimDir='~/.nvim'
+let s:nvimDir='~/.config/nvim'
 if g:os_windows
    let s:nvimDir='~/vimfiles'
 endif
@@ -450,7 +450,7 @@ nnoremap <leader>v V`]
 
 " ,ev Shortcut to edit and source .vimrc file on the fly on a vertical window.
 nnoremap <leader>ev :e $MYVIMRC<cr>
-nnoremap <leader>et :e ~/.dotfiles/tmux/tmux.conf<cr>
+nnoremap <leader>et :e ~/dotfiles/tmux/tmux.conf<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " search and replace the text under the cursor
@@ -572,6 +572,20 @@ if has("gui_running")
       set guifont=Powerline\ Consolas\ 10
    endif
 endif
+
+" ======== vimwiki stuff ==============
+augroup vimwiki_format
+   au!
+   au BufEnter *.wiki setlocal spell spelllang=en_us wrap tw=120 fo+=t 
+augroup END
+
+"imap <C-E> <Plug>VimwikiIncreaseLvlSingleItem
+"imap <C->> <Plug>VimwikiDecreaseLvlSingleItem
+"set textwidth=79
+"set formatoptions=qrn1
+"set colorcolumn=79
+
+nnoremap <leader>date "=strftime("%x")<CR>P
 
 " Source the vimrc file after saving it
 augroup vimrc_load
