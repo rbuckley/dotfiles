@@ -30,8 +30,46 @@ ctrl_c() {
 
 echo '================================================================================================' >&3
 echo 'Setting up a new workstation:' >&3
-echo '================================================================================================' >&3
+echo -n '================================================================================================' >&3
 
+echo '------------------------------------------------------------------------------------------------' >&3
+echo 'Installing package dependencies:' >&3
+echo -n '------------------------------------------------------------------------------------------------' >&3
+## apt install everything we need to build from source
+sudo apt install build-essential curl
 
+echo '------------------------------------------------------------------------------------------------' >&3
+echo 'Initializing submodules:' >&3
+echo '------------------------------------------------------------------------------------------------' >&3
+git submodule init --progress
+git submodule update --progress
+
+echo '------------------------------------------------------------------------------------------------' >&3
+echo 'Installing neovim:' >&3
+echo '------------------------------------------------------------------------------------------------' >&3
+pushd neovim
+git checkout stable
+sudo apt install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
+make CMAKE_BUILD_TYPE=Release
+sudo make install
+popd
+
+echo '------------------------------------------------------------------------------------------------' >&3
+echo 'Installing tmux:' >&3
+echo '------------------------------------------------------------------------------------------------' >&3
+pushd tmux/tmux
+git checkout 3.1
+sudo apt install -t libevent-dev libncurses5-dev
+sh autogen.sh
+./configure && make
+sudo make install
+popd
+
+mkdir ${CURDIR}/nodejs
+NODE_VER=v12.16.2
+DISTRO=linux-x64
+sudo mkdir -p /usr/local/lib/nodejs
+curl https://nodejs.org/dist/${NODE_VER}/node-${NODE_VER}-${DISTRO}.tar.xz ${CURDIR}/nodejs
+sudo tar Jvxf ${CURDIR}/nodejs/node-${NODE_VER}-${DISTRO}.tar.xz -C /usr/local/lib/nodejs
 
 exit 0

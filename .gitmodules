@@ -7,3 +7,12 @@
 [submodule "nerd-fonts"]
 	path = nerd-fonts
 	url = https://github.com/ryanoasis/nerd-fonts.git
+[submodule "neovim"]
+	path = neovim
+	url = https://github.com/neovim/neovim
+[submodule "tmux/tmux"]
+	path = tmux/tmux
+	url = https://github.com/tmux/tmux
+[submodule "fzf"]
+	path = fzf
+	url = https://github.com/junegunn/fzf.git

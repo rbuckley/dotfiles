@@ -3,10 +3,12 @@ if [ -f /etc/bashrc ]; then
 fi
 
 umask 2
-
+export NODE_VERS=v12.16.2
+export DISTRO=linux-x64
 export SVN_EDITOR=nvim
 export EDITOR=nvim
 export PATH=${PATH}:${HOME}/bin:~/dotfiles/git-scripts
+export PATH=${PATH}:/usr/local/lib/nodejs/node-${NODE_VERS}-${DISTRO}/bin
 
 alias findf='find -iname \* | xargs grep -nH --color=auto '
 alias findc='find -iname \*.c -o -iname \*.cc -o -iname \*.cpp | xargs grep -nH --color=auto '
@@ -15,8 +17,8 @@ alias findh='find -iname \*.h | xargs grep -nH --color=auto '
 alias ..='cd ..'
 alias cd..='cd ..'
 
-alias ll='ls -lhAG'
-alias ls='ls -CFG'
+alias ll='ls -lhAG --color'
+alias ls='ls -CFG --color'
 alias mkdir='mkdir -p'
 alias top='htop'
 alias vim='nvim'
@@ -62,11 +64,6 @@ CYAN='\e[1;36m'
 NC='\e[0m'              # No Color
 # --> Nice. Has the same effect as using "ansi.sys" in DOS.
 
-if [ $TERM == "xterm" ]; then
-	fortune
-fi
-
-date
 				
 #=========================================================================
 # PROGRAMMABLE COMPLETION - ONLY SINCE BASH-2.04
@@ -141,6 +138,11 @@ extract(){
 grab() {
     sudo chown -R ${USER} ${1:-.}
 }
-
+fif() {
+  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+  rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+}
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
