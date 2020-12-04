@@ -74,6 +74,8 @@ Plug 'christoomey/vim-tmux-navigator'
 " ========== calendar ========"
 Plug 'mattn/calendar-vim'
 
+" ========= Vue Syntax ==========="
+Plug 'posva/vim-vue'
 
 " ========== Rust ========"
 Plug 'rust-lang/rust.vim'
@@ -82,6 +84,9 @@ Plug 'mhinz/vim-crates'
 
 " =========== denite ================"
 Plug 'Shougo/denite.nvim', {'do': ':UpdateRemotePlugins' }
+
+" =========== Doxygen ========"
+Plug 'vim-scripts/DoxygenToolkit.vim'
 
 " =========== Arduino ========"
 " Snippets and syntax
